@@ -15,11 +15,6 @@ void main() {
   }
   WidgetsFlutterBinding.ensureInitialized();
 
-  Dog meucachorro = Dog(id: 1, nome: "spike", idade: 5);
-  debugPrint("Criando o cachorro...");
-  insertDog(meucachorro);
-  debugPrint("Lendo o cachorro: ${findAll()}");
-
 
   findAll().then(
     (dados) {

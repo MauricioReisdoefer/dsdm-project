@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sqlite/dao/DogDao.dart';
+import 'TelaFormulario.dart';
 
-class TelaInicial extends StatelessWidget {
+class TelaInicial extends StatefulWidget {
+  @override
+  State<TelaInicial> createState() => _TelaInicialState();
+}
+
+class _TelaInicialState extends State<TelaInicial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,6 +17,15 @@ class TelaInicial extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
         elevation: 4,
+        actions: [ FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Telaformulario()),
+        );
+    },
+    child: Icon(Icons.add),
+  )],
       ),
       body: FutureBuilder(
         initialData: [],
@@ -38,12 +53,10 @@ class TelaInicial extends StatelessWidget {
                 );
               }
               return ListView.builder(
-                padding: EdgeInsets.all(12),
                 itemCount: dogs.length,
                 itemBuilder: (context, index) {
                   return Card(
                     elevation: 3,
-                    margin: EdgeInsets.symmetric(vertical: 8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -63,7 +76,11 @@ class TelaInicial extends StatelessWidget {
                         ),
                       ),
                       subtitle: Text("Idade: ${dogs[index]['idade']} anos"),
-                      trailing: Icon(Icons.pets, color: Colors.deepPurple),
+                      trailing: IconButton(icon: Icon(Icons.pets), color: Colors.deepPurple, onPressed: () => {
+                        setState(() {
+                          deleteById(dogs[index]['id']);
+                        })
+                      },),
                     ),
                   );
                 },
