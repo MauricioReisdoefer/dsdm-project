@@ -17,3 +17,8 @@ Future<List<Map>> findAll() async {
   final Database db = await getDataBase();
   return db.query("dogs");
 }
+
+Future<int> deleteById(int id) async {
+  final Database db = await getDataBase();
+  return db.delete("dogs", where: "id = ?", whereArgs: [id]);
+}
