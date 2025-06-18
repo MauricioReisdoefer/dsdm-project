@@ -29,5 +29,8 @@ void main() {
       }
     }
   );
-  runApp(TelaInicial());
+  runApp(MaterialApp(
+    home: TelaInicial(),
+    debugShowCheckedModeBanner: false, // opcional
+  ));
 }
