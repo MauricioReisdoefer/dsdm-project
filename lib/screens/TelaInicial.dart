@@ -18,12 +18,18 @@ class _TelaInicialState extends State<TelaInicial> {
         backgroundColor: Colors.deepPurple,
         elevation: 4,
         actions: [ FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Telaformulario()),
-        );
-    },
+              MaterialPageRoute(builder: (context) => TelaFormulario()),
+            );
+
+            if (result == true) {
+              setState(() {
+              });
+            }
+          },
+
     child: Icon(Icons.add),
   )],
       ),
