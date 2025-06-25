@@ -45,18 +45,33 @@ class _TelaFormularioState extends State<TelaFormulario> {
           SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              String name = _controller.text;
-              int age = int.parse(_controller2.text);
+              String? name = _controller.text;
+              int? age = int.tryParse(_controller2.text);
+              if(age == null || name == null)
+              {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Idade ou Nome Inválido"), duration: const Duration(seconds: 1),));
+                Navigator.pop(context, true);
+                return;
+              }
               _controller.text = "";
               _controller2.text = "";
               Future<int> waiter = insertDog(
-                new Dog(nome:name, idade:age, id:ID_CONTROLLER));
+                new Dog(nome:name, idade:age ?? 0, id:ID_CONTROLLER));
               ID_CONTROLLER++;
               print("DEVE TER IDO ESSA MERDA");
               Navigator.pop(context, true);
             },
             child: Text("Enviar"),
           ),
+          ElevatedButton(
+            onPressed: () {
+        
+              _controller.text = "";
+              _controller2.text = "";
+            },
+            child: Text("Limpar"),
+          ),
+          
         ],
       ),
     );

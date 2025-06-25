@@ -26,6 +26,6 @@ void main() {
   );
   runApp(MaterialApp(
     home: TelaInicial(),
-    debugShowCheckedModeBanner: false, // opcional
+    debugShowCheckedModeBanner: false, 
   ));
 }
